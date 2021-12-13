@@ -10,15 +10,19 @@ const {
   abs,
 } = require("mathjs");
 
+const EPOCH_ERROR_INTERVAL = 10000;
+const EPOCHS = 200000;
+const LEARNING_RATE = 0.5;
+
 class NeuralNetwork {
   constructor({ inputNodes, hiddenNodes, outputNodes }) {
     this.inputNodes = inputNodes;
     this.hiddenNodes = hiddenNodes;
     this.outputNodes = outputNodes;
 
-    this.epochs = 50000;
+    this.epochs = EPOCHS;
     this.activation = activation.sigmoid;
-    this.learningRate = 0.5;
+    this.learningRate = LEARNING_RATE;
     this.output = 0;
 
     this.inputToHiddenSynapse = random(
@@ -73,9 +77,8 @@ class NeuralNetwork {
       );
       this.output = outputLayer;
 
-      if (i % 10000 === 0) {
-        console.error(`Error ${mean(abs(outputError))}`);
-        // console.log(JSON.stringify(outputLayer, undefined, 2));
+      if (i % EPOCH_ERROR_INTERVAL === 0) {
+        console.error(`Error ${mean(abs(outputError))} = Epoch ${i}`);
       }
     }
   }

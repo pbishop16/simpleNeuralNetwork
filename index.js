@@ -11,7 +11,7 @@ const target = matrix([[0], [1], [1], [0]]);
 
 const neuralNetwork = new NeuralNetwork({
   inputNodes: 2,
-  hiddenNodes: 2,
+  hiddenNodes: 16,
   outputNodes: 1,
 });
 
